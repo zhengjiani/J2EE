@@ -1,0 +1,4 @@
+driverClassName=com.mysql.jdbc.Driver;
+url=jdbc://mysql:///day11
+username=root
+password=7410
