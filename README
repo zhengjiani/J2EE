@@ -1,0 +1,89 @@
+客户管理系统---体验基于数据库javaweb的增删改查
+	
+	添加客户 查询客户列表 修改客户信息 删除客户 条件查询客户信息 分页查询客户
+
+	javaee的经典三层架构--工厂类实现解耦
+	
+	jsp+servlet+service+dao+jdbc+mysql+c3p0+dbutils
+	
+	
+	com.itheima.web
+		.service
+		.dao
+		.domain
+		.util
+		.exception
+		.factory
+	
+	JSTL
+	mysql驱动
+	beanutils
+	c3p0包
+	dbutils包
+
+	confing.properties
+	c3p0-config.xml
+
+	
+	create table customer (
+		id int primary key auto_increment,
+		name varchar(20),
+		gender varchar(10),
+		birthday date,
+		cellphone varchar(20),
+		email varchar(40),
+		preference varchar(100),
+		type varchar(40),
+		description varchar(255)
+	);
+	字段名		说明		类型
+	id		编号		int
+	name		客户姓名	varchar(20)
+	gender		性别		varchar(10)
+	birthday	生日		date
+	cellphone	手机		varchar(20)
+	email		电子邮件	varchar(40)
+	preference	客户爱好	varchar(100)
+	type		客户类型	varchar(40)
+	description	备注		varchar(255)
+	工厂类实现解耦
+	
+
+	1.添加客户
+		index.jsp 主页 提供<添加客户>超链接 
+			-->addCust.jsp 添加客户的页面,提供表单允许输入客户信息 
+			-->AddCustServlet 1.封装数据/校验数据 2.调用Service层添加客户的方法 3.重定向回到主页 -->Service 提供添加客户的方法 ,检查客户名是否已经存在,如果存在提示,如果不存在则调用dao增加客户方法 
+			--> Dao 根据用户名查找用户 添加客户
+	2.查询客户列表
+		index.jsp 页面中 提供<查询客户列表>超链接
+			-->ListCustServlet 调用Service中查询所有客户的方法 查到数据后,将查到的数据存入request域中,请求转发listCust.jsp页面展示
+			-->Service 调用dao中查询所有客户
+			-->dao中查询所有客户
+			-->listCust.jsp 页面,遍历list展示所有客户
+	
+	
+	3.修改客户信息 (查询/修改)
+		在客户信息列表页面,每一条记录后面都有一个<修改>超链接
+		-->CustInfoServlet 调用Service中的方法 找到当前客户信息 存入request域后带到updateCust.jsp页面显示
+		-->updateCust.jsp 显示客户信息,并允许修改 
+		-->UpdateCustServlet 封装数据/调用Service中修改数据的方法
+		-->Service 修改客户信息的方法,调用dao中的方法进行修改
+		-->Dao 提供修改客户信息的方法
+	
+	4.删除客户 
+		在客户信息列表页面,每一条记录后面都有一个<删除>超链接
+			-->DelCustServlet 获取要删除的客户id,调用Service中删除客户的方法,请求转发到客户列表页面
+			-->Service 删除客户的方法 调用dao中对应方法
+			-->Dao中根据id删除客户的方法
+	5.批量删除客户
+		在客户信息列表页面的每一条记录之前都有一个复选框,选中后,可以删除
+		-->BatchDelCustServlet 获取所有要删除的客户的id,调用Service中批量删除客户的方法做删除操作
+		-->Service中提供批量删除客户的方法,事务的管理
+		-->dao中删除客户的方法
+		Resourcr Bundle为国际化包
+
+
+
+
+
+

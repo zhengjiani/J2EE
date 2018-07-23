@@ -1,0 +1,2 @@
+ManagerDao=com.zjn.dao.ManagerDaoImpl
+ManagerService=com.zjn.service.ManagerServiceImpl
